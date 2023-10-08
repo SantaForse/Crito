@@ -1,0 +1,69 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+
+@{
+    var site = Model.Root();
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+
+}
+
+
+
+
+
+<div class="grid-container">
+
+            <div class="grid-item logo">
+                <a href="/" class="grid-item-logo" ><img src="~/static/logo/logotype.svg" alt="CritoLogo"></a>
+            </div>
+            
+            <div class="grid-item middle-grid">
+
+                <div class="middle-grid-item">
+                    <p class="showcase-top-contact">
+                        <i class="fa-regular fa-phone-volume"></i> +46 (8) 121 470 50
+                    </p>
+                    <p class="showcase-top-contact">
+                        <i class="fa-duotone fa-pipe"></i>&nbsp;&nbsp;
+                        <i class="fa-regular fa-envelope-dot"></i> info@crito.com
+                    </p>                      
+                    <p class="showcase-top-contact">
+                        <i class="fa-duotone fa-pipe"></i>&nbsp;&nbsp;
+                        <i class="fa-sharp fa-regular fa-location-dot"></i> Sveavägen 31, 111 34 STOCKHOLM
+                    </p>
+                </div>
+
+                <div class="middle-grid-item">
+                    <a class="showcase-navigation @(Model.Id == site.Id ? "active": null)" href="@site.Url(PublishedUrlProvider)"><p>@site.Name</p></a>
+                    
+                      @if (selection?.Length > 0)
+                        {
+        
+                        foreach (var item in selection)
+                                {
+                                    <a class="showcase-navigation @(item.IsAncestorOrSelf(Model) ? "active": null)" href="@item.Url(PublishedUrlProvider)"><p>@item.Name</p></a>
+                                }
+        
+                        }
+                </div>
+
+            </div>
+
+            <div class="grid-item right-showcase">
+                <p class="showcase-media">
+                    <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                </p>
+                <a class="login-button-top" href="/login">Login <i class="fa-solid fa-arrow-up-right"></i></a>
+            </div>
+            
+        </div>

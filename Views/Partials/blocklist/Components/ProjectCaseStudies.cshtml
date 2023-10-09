@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+
+@{
+    var content = (ContentModels.ProjectCaseStudies)Model.Content;
+}
+
+
+<div class="grid-card">
+    @{
+        var projectCaseStudiesImg = content.Value<MediaWithCrops>("projectCaseStudiesImg");
+        if (projectCaseStudiesImg != null)
+        {
+            <img src="@projectCaseStudiesImg.MediaUrl()" alt="@content.Value("projectCaseStudiesDescription")">
+        }
+     }
+    <p>@content.Value("projectCaseStudiesDescription")</p>
+    <div class="gray-line"></div>
+    <a class="white-button" href="@content.Value("projectCaseStudiesLinkUrl")">Read More <i class="fa-solid fa-arrow-up-right"></i></a>
+</div>

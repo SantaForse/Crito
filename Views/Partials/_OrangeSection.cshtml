@@ -1,0 +1,41 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.HomePage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+
+<section class="orange-section">
+    <div class="container">
+        <div class="meet-our-team">
+            <div class="team-title">
+                <p>@Model.Value("meetTeamTitle")</p>
+                <div class="browse-team">
+                    <h1>@Model.Value("meetTeamHeading")</h1>
+                    <a class="yellow-btn-team" href="@Model.Value("meetTeamButtonUrl")">@Model.Value("meetTeamButtonText")<i class="fa-solid fa-arrow-up-right"></i></a>
+                </div>
+            </div>
+                
+                @Html.GetBlockListHtml(Model.MeetTeam)
+                
+
+            
+            <div class="small-dots">
+                <i class="fa-solid fa-circle unactive-color"></i>
+                <i class="fa-solid fa-circle"></i>
+                <i class="fa-solid fa-circle unactive-color"></i>
+                <i class="fa-solid fa-circle unactive-color"></i>
+                <i class="fa-solid fa-circle unactive-color"></i>
+            </div>
+        </div>
+    </div>
+    <div class="reviews">
+        <div class="container">
+            <p>@Model.Value("testimonialTitle")</p>
+            <h1>@Model.Value("testimonialHeading")</h1>
+                
+                 @Html.GetBlockListHtml(Model.TestimonialReview)
+
+            <a class="black-btn" href="@Model.Value("testimonialButtonUrl")">@Model.Value("testimonialButtonText")<i class="fa-solid fa-arrow-up-right"></i></a>
+        </div>
+    </div>
+</section>

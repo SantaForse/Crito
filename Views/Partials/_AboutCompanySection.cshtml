@@ -1,0 +1,38 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.HomePage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+
+<section class="about-us container ">
+    <div class="left-about">
+        <img class="wavy-left" src="~/static/lines/background-wavy-lines.svg" alt="@Model.Value("aboutCompanyTitle")">
+        <div class="samantha-img">
+        @{
+            var aboutCompanyImg = Model.Value<MediaWithCrops>("aboutCompanyImg");
+            if (aboutCompanyImg != null)
+            {
+                <img src="@aboutCompanyImg.MediaUrl()" alt="@Model.Value("aboutCompanyTitle")">
+            }
+        }
+        </div>
+        
+        <div class="blue-square">
+            <h1>@Model.Value("aboutCompanyName")<span>@Model.Value("aboutCompanyPosition")</span></h1>
+            <p>@Model.Value("aboutCompanyDescription")</p>
+        </div>
+    </div>
+    <div class="right-about">
+        <div class="about-text">
+            <h3>@Model.Value("aboutCompanyTitle")</h3>
+            <h1>@Model.Value("aboutCompanyHeading")</h1>
+            <p>@Model.Value("aboutCompanyText")</p>
+            <p>@Model.Value("aboutCompanyTextTwo")</p>
+        </div>
+        <div class="about-buttons">
+            <a class="black-btn" href="@Model.Value("aboutCompanyBigButtonUrl")">@Model.Value("aboutCompanyBigButtonText")<i class="fa-solid fa-arrow-up-right"></i></a>
+            <a class="white-button" href="@Model.Value("aboutCompanySmallButtonUrl")"><i class="fa-solid fa-play"></i></a>
+            <p>@Model.Value("aboutCompanySmallButtonText")</p>
+        </div>
+    </div>
+</section>

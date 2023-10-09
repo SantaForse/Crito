@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.HomePage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+
+<section class="news-updates">
+    <div class="container news-updates-two">
+        <h2>@Model.Value("newsUpdatesTitle")</h2>
+        <input class="subscribe-input" type="text" id="myText" name="myText" placeholder="username@domain.com">
+        <button class="subscribe-button">@Model.Value("newsUpdatesButtonText")<i class="fa-solid fa-arrow-up-right"></i></button>
+    </div>
+    <div class="news-line-image">
+        <img src="~/static/lines/background-wavy-lines.svg" alt="">
+    </div>
+</section>

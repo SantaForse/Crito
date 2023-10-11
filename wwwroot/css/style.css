@@ -1227,12 +1227,13 @@
 
 
 
-
 .digitalization h2 {
     font-family: var(--font-dm);
     font-size: var(--font-size-45);
     font-weight: var(--font-weight-bold);
     color: var(--color-black);
+    max-width: 550px;
+    margin-top: 120px;
 }
 
     .digitalization .digitalization-points {
@@ -1262,7 +1263,7 @@
             flex-direction: column; 
         }
 
-            .digitalization-flex .digitalization-left img {
+            .digitalization-flex .digitalization-left .digitalization-img {
                 width: 760px;
                 margin-top: 75px;
             }

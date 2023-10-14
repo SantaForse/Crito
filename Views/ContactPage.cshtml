@@ -1,0 +1,61 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "LayoutWithBreadcrumb.cshtml";
+    var contactForm = new Crito.Models.ContactForm();
+}
+
+<section class="contact-section container">
+        <div class="contact-section-box">
+            <button><i class="fa-sharp fa-solid fa-location-dot" style="color: #ffffff;"></i></button>
+            <div>
+                <h3>Visit Us</h3>
+                <p>@Model.Value("contactInformationStreetName")</p>
+                <p>@Model.Value("contactInformationCityAndPostalCode")</p>
+            </div>
+        </div>
+
+        <div class="contact-section-box">
+            <button><i class="fa-solid fa-phone" style="color: #ffffff;"></i></button>
+            <div>
+                <h3>Call Us</h3>
+                <p>@Model.Value("contactInformationPhoneNumber1")</p>
+                <p>@Model.Value("contactInformationPhoneNumber2")</p>
+            </div>
+            
+        </div>
+
+        <div class="contact-section-box">
+            <button><i class="fa-solid fa-envelope" style="color: #ffffff;"></i></button>
+            <div>
+                <h3>Email Us</h3>
+                <p>@Model.Value("contactInformationEmail1")</p>
+                <p>@Model.Value("contactInformationEmail2")</p>
+            </div>
+        </div>
+    </section>
+    
+
+    @using (Html.BeginUmbracoForm("Index", "Contacts", FormMethod.Post))
+
+    {
+    <section class="message-section container">
+        <h3 class="message-section-title-one">Leave us a message </h3>
+        <h3 class="message-section-title-two">for any information.</h3>
+        
+            <div asp-validation-summary="All"></div>
+            
+            <input asp-for="@contactForm.Name" class="message-input" type="text" id="message-name" name="message-name" placeholder="Name*">
+            <input asp-for="@contactForm.Email" class="message-input" type="email" id="message-email" name="message-email" placeholder="Email*">
+            <textarea asp-for="@contactForm.Message" class=" message-input message-input-message" type="text" id="message-your-message" name="message-your-message" placeholder="Your Message*"></textarea>
+            <button type="submit" class="send-message-button">Send Message <i class="fa-solid fa-arrow-up-right"></i></button>
+   
+    </section>
+
+    }
+    <section class="map">
+        <iframe src="@Model.Value("contactInformationMapLink")" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+    
+    

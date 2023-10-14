@@ -1,0 +1,77 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+
+@{
+    var itemsPerPage = 3;
+        var pageNumber = 1;
+    
+        if (!int.TryParse(Context.Request.Query["page"], out pageNumber))
+        {
+            pageNumber = 1;
+        }
+    
+	var selection = Umbraco.Content(Guid.Parse("a609be2f-2ecf-41ca-aee1-3e686ec7f280"))
+        .ChildrenOfType("newsItemPage")
+        .Where(x => x.IsVisible())
+        .OrderByDescending(x => x.CreateDate);
+        
+        
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection?.Skip((pageNumber - 1) * itemsPerPage).Take(itemsPerPage);
+
+}
+
+ <section class="news">
+        <div class="container">
+            <div class="news-title">
+                <h1>Our News & Articles</h1>
+            </div>
+            
+            <div class="news-grid">
+
+                @if (pagedItems != null)
+                {
+                    @foreach (var item in pagedItems!)
+                    {
+                        var url = item.Url();
+                        var date = item.CreateDate;
+                        var image = item.Value<IPublishedContent>("newsImg");
+                        var category = item.Value("newsCategory");
+                        var title = item.Name();
+                        var preamble = item.Value("newsPreamble");
+    
+    
+                        <a href="@url" class="news-card">
+                            <div class="yellow-square">
+                                <h2>@date.ToString("dd")</h2>
+                                <p>@date.ToString("MMM")</p>
+                            </div>
+                            <img src="@image?.Url()" alt="news">
+                            <p>@category</p>
+                            <h3>@title</h3>
+                            <p>@preamble</p>
+                        </a>
+                    }
+                }
+                
+            </div>
+            
+
+            <div class="moving-news">
+               
+
+                @for (int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++) 
+                {
+                    if (i == pageNumber)
+                    {
+                    <a href="#" style="border:none" ><i class="fa-sharp fa-solid fa-circle"></i></a>
+                    } else
+                    {
+                    <a style="border:none" href="?page=@i"><i class="fa-duotone fa-circle"></i></a>
+                    }
+                }   
+
+            </div>
+        </div>
+    </section>
+

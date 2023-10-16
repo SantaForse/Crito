@@ -21,7 +21,9 @@ public class ContactsController : SurfaceController
     public IActionResult Index(ContactForm contactForm)
     {
         if (!ModelState.IsValid)
+        {
             return CurrentUmbracoPage();
+        }
 
         //send email
         using var mail = new MailService("no-reply@crito.com", "smtp.crito.com", 587, "contact@crito.com", "BytMig123!");
